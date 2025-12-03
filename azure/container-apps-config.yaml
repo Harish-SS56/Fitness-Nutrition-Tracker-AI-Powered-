@@ -1,0 +1,146 @@
+# Azure Container Apps Configuration for Fitness Tracker
+apiVersion: 2022-10-01
+location: East US
+resourceGroup: fitness-tracker-rg
+environment: fitness-tracker-env
+
+# Container Apps Environment
+containerAppEnvironment:
+  name: fitness-tracker-env
+  location: East US
+  properties:
+    appLogsConfiguration:
+      destination: log-analytics
+    workloadProfiles:
+      - name: Consumption
+        workloadProfileType: Consumption
+
+# Frontend Container App
+frontendApp:
+  name: fitness-tracker-frontend
+  properties:
+    environmentId: /subscriptions/{subscription-id}/resourceGroups/fitness-tracker-rg/providers/Microsoft.App/managedEnvironments/fitness-tracker-env
+    configuration:
+      ingress:
+        external: true
+        targetPort: 3000
+        allowInsecure: false
+        traffic:
+          - weight: 100
+            latestRevision: true
+      secrets:
+        - name: database-url
+          value: "{DATABASE_URL}"
+        - name: gemini-api-key
+          value: "{GEMINI_API_KEY}"
+        - name: email-user
+          value: "{EMAIL_USER}"
+        - name: email-pass
+          value: "{EMAIL_PASS}"
+        - name: session-secret
+          value: "{SESSION_SECRET}"
+        - name: registry-password
+          value: "{REGISTRY_PASSWORD}"
+      registries:
+        - server: "{REGISTRY_NAME}.azurecr.io"
+          username: "{REGISTRY_USERNAME}"
+          passwordSecretRef: registry-password
+    template:
+      containers:
+        - name: frontend
+          image: "{REGISTRY_NAME}.azurecr.io/fitness-tracker-frontend:latest"
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: DATABASE_URL
+              secretRef: database-url
+            - name: GEMINI_API_KEY
+              secretRef: gemini-api-key
+            - name: EMAIL_HOST
+              value: smtp.gmail.com
+            - name: EMAIL_PORT
+              value: "587"
+            - name: EMAIL_USER
+              secretRef: email-user
+            - name: EMAIL_PASS
+              secretRef: email-pass
+            - name: SESSION_SECRET
+              secretRef: session-secret
+            - name: NEXTAUTH_URL
+              value: "https://{APP_URL}"
+          resources:
+            cpu: 0.5
+            memory: 1Gi
+          probes:
+            - type: Liveness
+              httpGet:
+                path: /api/health
+                port: 3000
+              initialDelaySeconds: 30
+              periodSeconds: 10
+            - type: Readiness
+              httpGet:
+                path: /api/health
+                port: 3000
+              initialDelaySeconds: 5
+              periodSeconds: 5
+      scale:
+        minReplicas: 1
+        maxReplicas: 10
+        rules:
+          - name: http-scaling
+            http:
+              metadata:
+                concurrentRequests: "30"
+
+# Email Service Container App
+emailServiceApp:
+  name: fitness-tracker-email-service
+  properties:
+    environmentId: /subscriptions/{subscription-id}/resourceGroups/fitness-tracker-rg/providers/Microsoft.App/managedEnvironments/fitness-tracker-env
+    configuration:
+      secrets:
+        - name: database-url
+          value: "{DATABASE_URL}"
+        - name: email-user
+          value: "{EMAIL_USER}"
+        - name: email-pass
+          value: "{EMAIL_PASS}"
+        - name: registry-password
+          value: "{REGISTRY_PASSWORD}"
+      registries:
+        - server: "{REGISTRY_NAME}.azurecr.io"
+          username: "{REGISTRY_USERNAME}"
+          passwordSecretRef: registry-password
+    template:
+      containers:
+        - name: email-service
+          image: "{REGISTRY_NAME}.azurecr.io/fitness-tracker-email-service:latest"
+          env:
+            - name: DATABASE_URL
+              secretRef: database-url
+            - name: EMAIL_HOST
+              value: smtp.gmail.com
+            - name: EMAIL_PORT
+              value: "587"
+            - name: EMAIL_USER
+              secretRef: email-user
+            - name: EMAIL_PASS
+              secretRef: email-pass
+            - name: PYTHONPATH
+              value: /app
+          resources:
+            cpu: 0.25
+            memory: 0.5Gi
+          probes:
+            - type: Liveness
+              exec:
+                command:
+                  - python
+                  - email_service.py
+                  - test
+              initialDelaySeconds: 60
+              periodSeconds: 300
+      scale:
+        minReplicas: 1
+        maxReplicas: 1

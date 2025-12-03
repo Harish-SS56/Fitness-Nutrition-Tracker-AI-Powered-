@@ -1,0 +1,72 @@
+# Azure Container Apps deployment configuration
+apiVersion: 2022-10-01
+location: East US
+resourceGroup: fitness-tracker-rg
+environment: fitness-tracker-env
+
+containerApps:
+  # Frontend Next.js Application
+  - name: fitness-tracker-frontend
+    image: ${REGISTRY_NAME}.azurecr.io/fitness-tracker-frontend:latest
+    ingress:
+      external: true
+      targetPort: 3000
+      allowInsecure: false
+    resources:
+      cpu: 0.5
+      memory: 1Gi
+    replicas:
+      min: 1
+      max: 3
+    env:
+      - name: NODE_ENV
+        value: production
+      - name: DATABASE_URL
+        secretRef: database-url
+      - name: GEMINI_API_KEY
+        secretRef: gemini-api-key
+      - name: EMAIL_HOST
+        value: smtp.gmail.com
+      - name: EMAIL_PORT
+        value: "587"
+      - name: EMAIL_USER
+        secretRef: email-user
+      - name: EMAIL_PASS
+        secretRef: email-pass
+      - name: SESSION_SECRET
+        secretRef: session-secret
+
+  # Python Email Service
+  - name: fitness-tracker-email-service
+    image: ${REGISTRY_NAME}.azurecr.io/fitness-tracker-email-service:latest
+    ingress:
+      external: false
+    resources:
+      cpu: 0.25
+      memory: 0.5Gi
+    replicas:
+      min: 1
+      max: 1
+    env:
+      - name: DATABASE_URL
+        secretRef: database-url
+      - name: EMAIL_HOST
+        value: smtp.gmail.com
+      - name: EMAIL_PORT
+        value: "587"
+      - name: EMAIL_USER
+        secretRef: email-user
+      - name: EMAIL_PASS
+        secretRef: email-pass
+
+secrets:
+  - name: database-url
+    value: ${DATABASE_URL}
+  - name: gemini-api-key
+    value: ${GEMINI_API_KEY}
+  - name: email-user
+    value: ${EMAIL_USER}
+  - name: email-pass
+    value: ${EMAIL_PASS}
+  - name: session-secret
+    value: ${SESSION_SECRET}

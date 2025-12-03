@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "namePrefix": {
+      "value": "fitness-tracker"
+    },
+    "environment": {
+      "value": "prod"
+    },
+    "location": {
+      "value": "East US"
+    },
+    "databaseUrl": {
+      "value": "YOUR_DATABASE_URL_HERE"
+    },
+    "geminiApiKey": {
+      "value": "YOUR_GEMINI_API_KEY_HERE"
+    },
+    "emailUser": {
+      "value": "YOUR_EMAIL_USER_HERE"
+    },
+    "emailPass": {
+      "value": "YOUR_EMAIL_PASS_HERE"
+    },
+    "sessionSecret": {
+      "value": "YOUR_SESSION_SECRET_HERE"
+    }
+  }
+}

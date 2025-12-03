@@ -1,0 +1,88 @@
+2025-09-26 17:08:55,435 - INFO - Python Email Service initialized with database integration
+2025-09-26 17:08:57,342 - INFO - ✅ SMTP connection test successful via STARTTLS
+2025-09-26 17:09:53,990 - INFO - Python Email Service initialized with database integration
+2025-09-26 17:09:53,998 - INFO - 📧 Starting daily reminder process for all users...
+2025-09-26 17:09:57,315 - INFO - 📊 Found 2 users with email addresses
+2025-09-26 17:09:57,315 - INFO - 📧 Preparing daily reminder for: hk6113367@gmail.com
+2025-09-26 17:10:03,064 - INFO - Email logged to database with ID: 1
+2025-09-26 17:10:05,717 - INFO - Email statistics updated: daily_reminder - sent
+2025-09-26 17:10:05,717 - INFO - Daily reminder sent successfully to hk6113367@gmail.com via STARTTLS
+2025-09-26 17:10:05,719 - INFO - 📧 Preparing daily reminder for: harishdeepikassdeepikass@gmail.com
+2025-09-26 17:10:11,924 - INFO - Email logged to database with ID: 2
+2025-09-26 17:10:14,752 - INFO - Email statistics updated: daily_reminder - sent
+2025-09-26 17:10:14,752 - INFO - Daily reminder sent successfully to harishdeepikassdeepikass@gmail.com via STARTTLS
+2025-09-26 17:10:14,752 - INFO - 📧 Daily reminder process completed: 2 sent, 0 failed
+2025-10-07 08:16:27,942 - INFO - Python Email Service initialized with database integration
+2025-10-07 08:16:30,661 - INFO - ✅ SMTP connection test successful via STARTTLS
+2025-10-07 08:16:30,662 - INFO - 🔍 Testing database connection and user fetching...
+2025-10-07 08:16:37,001 - ERROR - Database connection failed: connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (44.198.216.75), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (3.218.140.61), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (54.156.15.30), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-07 08:16:37,037 - INFO - 📧 Preparing daily reminder for: hk6113367@gmail.com
+2025-10-07 08:16:47,514 - ERROR - Database connection failed: connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (44.198.216.75), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (3.218.140.61), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (54.156.15.30), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-07 08:16:53,781 - ERROR - Database connection failed: connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (44.198.216.75), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (3.218.140.61), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (54.156.15.30), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-07 08:16:53,790 - INFO - Daily reminder sent successfully to hk6113367@gmail.com via STARTTLS
+2025-10-07 08:16:53,794 - INFO - 📧 Preparing daily reminder for: harishdeepikassdeepikass@gmail.com
+2025-10-07 08:17:03,542 - ERROR - Database connection failed: connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (44.198.216.75), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (3.218.140.61), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (54.156.15.30), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-07 08:17:06,028 - ERROR - Database connection failed: connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (44.198.216.75), port 5432 failed: Software caused connection abort (0x00002745/10053)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (3.218.140.61), port 5432 failed: Network is unreachable (0x00002743/10051)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "ep-fragrant-violet-ad4xrlr3-pooler.c-2.us-east-1.aws.neon.tech" (54.156.15.30), port 5432 failed: Network is unreachable (0x00002743/10051)
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-10-07 08:17:06,089 - INFO - Daily reminder sent successfully to harishdeepikassdeepikass@gmail.com via STARTTLS
+2025-10-07 08:17:06,172 - INFO - Preparing achievement notification for: hk6113367@gmail.com
+2025-10-07 08:17:32,328 - INFO - Python Email Service initialized with database integration
+2025-10-07 08:17:34,598 - INFO - ✅ SMTP connection test successful via STARTTLS
+2025-10-07 08:17:34,600 - INFO - 🔍 Testing database connection and user fetching...
+2025-10-07 08:17:39,855 - ERROR - ❌ Error fetching users from database: 0
+2025-10-07 08:17:39,857 - ERROR - Cannot send emails without database access - returning empty list
+2025-10-07 08:17:39,861 - INFO - 📧 Preparing daily reminder for: hk6113367@gmail.com
+2025-10-07 08:17:46,284 - INFO - Email logged to database with ID: 3
+2025-10-07 08:17:49,182 - INFO - Email statistics updated: daily_reminder - sent
+2025-10-07 08:17:49,183 - INFO - Daily reminder sent successfully to hk6113367@gmail.com via STARTTLS
+2025-10-07 08:17:49,184 - INFO - 📧 Preparing daily reminder for: harishdeepikassdeepikass@gmail.com
+2025-10-07 08:17:55,489 - INFO - Email logged to database with ID: 4
+2025-10-07 08:17:58,671 - INFO - Email statistics updated: daily_reminder - sent
+2025-10-07 08:17:58,671 - INFO - Daily reminder sent successfully to harishdeepikassdeepikass@gmail.com via STARTTLS
+2025-10-07 08:17:58,674 - INFO - Preparing achievement notification for: hk6113367@gmail.com
+2025-10-07 08:18:05,220 - INFO - Email logged to database with ID: 5
+2025-10-07 08:18:09,217 - INFO - Email statistics updated: achievement_notification - sent
+2025-10-07 08:18:09,220 - INFO - Achievement notification sent successfully to hk6113367@gmail.com
+2025-10-07 08:30:45,633 - INFO - Python Email Service initialized with database integration
+2025-10-07 08:30:48,311 - ERROR - ❌ Error fetching users from database: 0
+2025-10-07 08:30:48,314 - ERROR - Cannot send emails without database access - returning empty list
+2025-10-07 08:30:48,602 - INFO - Python Email Service initialized with database integration
+2025-10-07 08:30:48,611 - INFO - 🔍 Testing database connection and user fetching...
+2025-10-07 08:30:54,235 - ERROR - ❌ Error fetching users from database: 0
+2025-10-07 08:30:54,237 - ERROR - Cannot send emails without database access - returning empty list
+2025-10-07 08:30:56,248 - INFO - ✅ SMTP connection test successful via STARTTLS
+2025-10-07 08:30:59,109 - ERROR - ❌ Error fetching users from database: 0
+2025-10-07 08:30:59,111 - ERROR - Cannot send emails without database access - returning empty list
+2025-10-07 08:31:02,234 - INFO - 📧 Starting daily reminder process for ALL users from database...
+2025-10-07 08:31:05,311 - ERROR - ❌ Error fetching users from database: 0
+2025-10-07 08:31:05,315 - ERROR - Cannot send emails without database access - returning empty list
+2025-10-07 08:31:05,317 - ERROR - ❌ No users found in database with email addresses - cannot send reminders

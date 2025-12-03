@@ -1,0 +1,49 @@
+Fitness & Nutrition Tracker – Structured Prompt
+
+⚠️ **Prompt Start** ⚠️
+
+I want you to build a **Fitness & Nutrition Tracking Web Application** with the following architecture:
+
+---
+
+## 🧩 1. User Registration & Goal Setup
+
+### Flow:
+
+1. User opens the app → enters:
+
+   * Name
+   * Height (cm)
+   * Weight (kg)
+
+2. Backend automatically calculates **BMI**:
+   `BMI = weight / (height/100)^2`
+
+3. Based on BMI thresholds:
+
+   * `<18.5` → Underweight
+   * `18.5–24.9` → Normal
+   * `25–29.9` → Overweight
+   * `30+` → Obese
+
+4. Show user the BMI + suggested **goal type** (maintenance / gain / loss).
+
+5. **But final choice is user’s** → they select their goal and set custom **calorie & protein targets**.
+
+6. Save everything into `users` table.
+
+### DB Table: `users`
+
+```sql
+CREATE TABLE users (
+  user_id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  height DOUBLE PRECISION NOT NULL,
+  weight DOUBLE PRECISION NOT NULL,
+  bmi DOUBLE PRECISION,
+  bmi_category TEXT,
+  goal_type TEXT, -- maintenance/gain/loss
+  calorie_goal DOUBLE PRECISION,
+  protein_goal DOUBLE PRECISION,
+  created_at TIMESTAMP DEFAULT NOW()
+);

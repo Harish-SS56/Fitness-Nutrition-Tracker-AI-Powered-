@@ -1,0 +1,117 @@
+{
+  "family": "fitness-tracker",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::ACCOUNT_ID:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "fitness-tracker-frontend",
+      "image": "ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com/fitness-tracker-frontend:latest",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "EMAIL_HOST",
+          "value": "smtp.gmail.com"
+        },
+        {
+          "name": "EMAIL_PORT",
+          "value": "587"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DATABASE_URL",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:fitness-tracker/database-url"
+        },
+        {
+          "name": "GEMINI_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:fitness-tracker/gemini-api-key"
+        },
+        {
+          "name": "EMAIL_USER",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:fitness-tracker/email-user"
+        },
+        {
+          "name": "EMAIL_PASS",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:fitness-tracker/email-pass"
+        },
+        {
+          "name": "SESSION_SECRET",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:fitness-tracker/session-secret"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/fitness-tracker",
+          "awslogs-region": "REGION",
+          "awslogs-stream-prefix": "frontend"
+        }
+      },
+      "healthCheck": {
+        "command": ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    },
+    {
+      "name": "fitness-tracker-email-service",
+      "image": "ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com/fitness-tracker-email-service:latest",
+      "essential": false,
+      "environment": [
+        {
+          "name": "EMAIL_HOST",
+          "value": "smtp.gmail.com"
+        },
+        {
+          "name": "EMAIL_PORT",
+          "value": "587"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DATABASE_URL",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:fitness-tracker/database-url"
+        },
+        {
+          "name": "EMAIL_USER",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:fitness-tracker/email-user"
+        },
+        {
+          "name": "EMAIL_PASS",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:fitness-tracker/email-pass"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/fitness-tracker",
+          "awslogs-region": "REGION",
+          "awslogs-stream-prefix": "email-service"
+        }
+      },
+      "healthCheck": {
+        "command": ["CMD-SHELL", "python email_service.py test || exit 1"],
+        "interval": 60,
+        "timeout": 30,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}
